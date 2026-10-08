@@ -98,6 +98,19 @@ Everything else — the parsing logic, the DBC file, the decoding code —
 stays exactly the same. That's the real lesson here: once you understand
 frames, IDs, and DBCs, the hardware underneath is just a transport detail.
 
+## Running the tests
+```bash
+pip install pytest
+pytest -v
+```
+These tests check that encoding and decoding frames round-trips
+correctly, and - critically - that the manual parser and the DBC-based
+`cantools` decoder agree with each other. This second check is the one
+that would have caught the Motorola-vs-Intel byte-order bug hit during
+development, automatically. A GitHub Actions workflow
+(`.github/workflows/ci.yml`) runs these same tests on every push - see
+the **Actions** tab on the GitHub repo.
+
 ## Next steps / ideas to extend this
 - Log decoded signals to a CSV file over time
 - Plot RPM/Speed live with `matplotlib`
